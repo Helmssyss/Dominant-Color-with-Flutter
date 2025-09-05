@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 4.1.1)
+project(c_bindings)
+file(GLOB CXX_FILE "${CMAKE_SOURCE_DIR}/../src/*.cpp")
+set(SOURCES ${CXX_FILE})
+include_directories(${CMAKE_SOURCE_DIR}/../include)
+add_library(c_bindings SHARED ${SOURCES})
