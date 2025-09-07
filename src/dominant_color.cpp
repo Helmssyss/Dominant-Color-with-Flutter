@@ -16,7 +16,7 @@ uint32_t DominantColor::CalculateDominantColor(const uint8_t* pixels, const int&
 
     for (int t = 0; t < numThreads; t++) {
         int end = (t == numThreads - 1) ? totalPixels : start + chunkSize;
-        threads.emplace_back(&DominantColor::ThreadWorker, this, pixels, start, end, std::ref(histos[t]));
+        threads.emplace_back(&DominantColor::ThreadWorker, this, pixels, start * 3, end * 3, std::ref(histos[t]));
         start += chunkSize;
     }
 
@@ -57,4 +57,5 @@ void DominantColor::ThreadWorker(const uint8_t* pixels, int start, int end, std:
         uint32_t key = (r << 16) | (g << 8) | b;
         localHisto[key]++;
     }
+
 }
